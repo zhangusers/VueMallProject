@@ -90,28 +90,28 @@
 </template>
 
 <script>
-  export default {
-    name: 'home',
-    beforeMount () {
-      if (!localStorage.getItem('token')) {
-        this.$router.push({
-          name: 'login'
-        })
-      }
-    },
-    methods: {
-      logout () {
-        // 清除 token 值
-        localStorage.clear('token')
-        // 跳转页面
-        this.$router.push({
-          name: 'login'
-        })
-        // 消息提示
-        this.$message.warning('退出成功')
-      }
+export default {
+  name: 'home',
+  beforeMount () {
+    if (!localStorage.getItem('token')) {
+      this.$router.push({
+        name: 'login'
+      })
+    }
+  },
+  methods: {
+    logout () {
+      // 清除 token 值
+      localStorage.clear('token')
+      // 跳转页面
+      this.$router.push({
+        name: 'login'
+      })
+      // 消息提示
+      this.$message.warning('退出成功')
     }
   }
+}
 </script>
 
 <style scoped>
@@ -134,4 +134,3 @@
     text-decoration: none;
   }
 </style>
-

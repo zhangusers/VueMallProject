@@ -1,11 +1,7 @@
 <template>
   <el-card>
     <!-- 面包屑 -->
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>用户管理</el-breadcrumb-item>
-      <el-breadcrumb-item>用户列表</el-breadcrumb-item>
-    </el-breadcrumb>
+    <cus-Bread level1="用户管理" level2="用户列表"></cus-Bread>
     <!-- 搜索框 -->
     <el-row>
       <el-input @clear="getAllUsers()" placeholder="请输入内容" v-model="query" class="searchVal" clearable>
@@ -169,8 +165,9 @@ export default {
   methods: {
     // 设置用户状态
     async changeState (user) {
-      const res = await this.$http.put(`users/${user.id}/state/{user.mg_state}`)
-      // console.log(res)
+      console.log(user)
+      const res = await this.$http.put(`users/${user.id}/state/${user.mg_state}`)
+      console.log(res)
       const {data: {meta: { msg, status }}} = res
       if (status === 200) {
         this.$message.success(msg)
@@ -210,11 +207,8 @@ export default {
     // 编辑用户-发送请求
     async EditUser () {
       // console.log(this.formData)
-      const res = await this.$http.put(`users/${this.formData.id}`, {
-        email: this.formData.email,
-        mobile: this.formData.mobile
-      })
-      console.log(res)
+      const res = await this.$http.put(`users/${this.formData.id}`, this.formData)
+      // console.log(res)
       const {data: {meta: {status, msg}}} = res
       if (status === 200) {
         this.dialogFormVisibleEdit = false
@@ -227,8 +221,12 @@ export default {
 
     // 编辑用户-展示对话框
     showDiaEditUser (user) {
-      this.formData = user
       this.dialogFormVisibleEdit = true
+      this.formData.username = user.username
+      this.formData.password = user.password
+      this.formData.email = user.email
+      this.formData.mobile = user.mobile
+      this.formData.id = user.id
     },
 
     // 删除用户 - 提示并发送请求
@@ -298,9 +296,6 @@ export default {
 
     // 获取首屏数据
     async getTableData () {
-      // 授权
-      const AUTH_TOKEN = localStorage.getItem('token')
-      this.$http.defaults.headers.common['Authorization'] = AUTH_TOKEN
       const res = await this.$http.get(`users?query=${this.query}&pagenum=${this.pagenum}&pagesize=${this.pagesize}`)
       // console.log(res)
       const {data: {data: { total, users }, meta: { status }}} = res

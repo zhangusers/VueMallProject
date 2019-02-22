@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+import { Message } from 'element-ui'
+
 const HttpServer = {}
 
 HttpServer.install = function (Vue) {
@@ -14,6 +16,24 @@ HttpServer.install = function (Vue) {
     }
     return config
   }, function (error) {
+    return Promise.reject(error)
+  })
+  axios.interceptors.response.use(function (response) {
+    // 对响应数据做点什么
+    // console.log('res拦截器被触发----')
+    // console.log(response)
+    const {
+      meta: {
+        status,
+        msg
+      }
+    } = response.data
+    if (status !== 200 && status !== 201) {
+      Message.warning(msg)
+    }
+    return response
+  }, function (error) {
+    // 对响应错误做点什么
     return Promise.reject(error)
   })
   Vue.prototype.$http = axios

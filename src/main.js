@@ -6,14 +6,14 @@ import CusBread from '@/components/cus-Bread'
 
 import '@/assets/css/base.css'
 
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+import ELEMENT from 'element-ui'
+// import 'element-ui/lib/theme-chalk/index.css'
 import moment from 'moment'
 
 import router from './router'
 import HttpServer from '@/plugins/http'
 
-Vue.use(ElementUI)
+Vue.use(ELEMENT)
 Vue.use(HttpServer)
 
 // 全局时间格式化过滤器

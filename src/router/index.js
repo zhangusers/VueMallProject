@@ -1,22 +1,23 @@
 import Vue from 'vue'
-import Router from 'vue-router'
-import Login from '@/components/login'
-import Home from '@/components/home'
-import Users from '@/components/users'
-import Rights from '@/components/rights'
-import Roles from '@/components/roles'
-import Goods from '@/components/goods/goods'
-import GoodsAdd from '@/components/goods/goodsadd'
-import Params from '@/components/goods/params'
-import Categories from '@/components/goods/categories'
-import Orders from '@/components/orders'
-import Reports from '@/components/reports'
+import VueRouter from 'vue-router'
 
 import { Message } from 'element-ui'
 
-Vue.use(Router)
+const Login = () => import('@/components/login')
+const Home = () => import('@/components/home')
+const Users = () => import('@/components/users')
+const Rights = () => import('@/components/rights')
+const Roles = () => import('@/components/roles')
+const Goods = () => import('@/components/goods/goods')
+const GoodsAdd = () => import('@/components/goods/goodsadd')
+const Params = () => import('@/components/goods/params')
+const Categories = () => import('@/components/goods/categories')
+const Orders = () => import('@/components/orders')
+const Reports = () => import('@/components/reports')
 
-const router = new Router({
+Vue.use(VueRouter)
+
+const router = new VueRouter({
   routes: [
     {
       path: '/login',

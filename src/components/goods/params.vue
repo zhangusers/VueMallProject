@@ -87,7 +87,6 @@
             </el-table>
           </el-tab-pane>
         </el-tabs>
-
       </el-form>
     </el-card>
 </template>

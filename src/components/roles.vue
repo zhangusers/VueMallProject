@@ -4,7 +4,7 @@
     <cus-bread level1="权限管理" level2="角色列表"></cus-bread>
     <!-- 添加按钮 -->
     <el-button @click.prevent="showDiaAddRole()" type="primary" plain class="add">添加角色</el-button>
-    <el-table :data="list" style="width: 100%">
+    <el-table :data="list" style="width: 100%" @expand-change="change">
       <el-table-column type="expand">
         <template slot-scope="scope">
           <el-form label-position="left" inline >
@@ -140,6 +140,12 @@ export default {
     this.getRoleData()
   },
   methods: {
+    change (row, expandedRows) {
+      if (expandedRows.length > 1) {
+        expandedRows.shift()
+        // console.log(expandedRows)
+      }
+    },
     // 分配权限-设置权限
     async SetRole () {
       // 获取当前角色选中的节点id

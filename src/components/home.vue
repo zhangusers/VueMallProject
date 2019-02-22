@@ -12,7 +12,8 @@
     </el-header>
     <el-container class="container">
       <el-aside width="200px" class="aside">
-        <el-menu default-active="2" :router="true" :unique-opened="true" class="menu">
+        <el-menu
+          :default-active="$route.name" :router="true" :unique-opened="true" class="menu">
           <!-- 用户管理 -->
           <el-submenu :index="item.order+''" v-for="item in menuList" :key="item.id">
             <template slot="title">
